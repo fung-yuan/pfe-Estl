@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Learning Checklist</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --text-color: #333;
+            --light-bg: #f5f5f5;
+            --card-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            margin: 10px 0;
+            padding: 10px;
+            background: var(--light-bg);
+            border-radius: 4px;
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            margin-top: 3px;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .description {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .progress {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: var(--card-shadow);
+        }
+
+        @media (max-width: 600px) {
+            .progress {
+                position: static;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Project Learning Checklist</h1>
+
+        <div class="section">
+            <h2>Frontend Technologies</h2>
+            <ul class="checklist">
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>JavaScript/ES6+</strong>
+                        <div class="description">Core language features, async/await, promises, modules</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Axios</strong>
+                        <div class="description">HTTP client, interceptors, request/response handling</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>LocalStorage API</strong>
+                        <div class="description">Browser storage for authentication tokens and user data</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Fetch API</strong>
+                        <div class="description">Native browser API for making HTTP requests</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Base64 Encoding</strong>
+                        <div class="description">Understanding btoa() and atob() for credential encoding</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Backend Technologies</h2>
+            <ul class="checklist">
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Java Basics</strong>
+                        <div class="description">Core Java concepts used in the backend</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Servlets</strong>
+                        <div class="description">HTTP request handling in Java web applications</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>JPQL</strong>
+                        <div class="description">Java Persistence Query Language for database operations</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Authentication System</h2>
+            <ul class="checklist">
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Basic Authentication</strong>
+                        <div class="description">HTTP authentication scheme and Base64 encoding</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Token Storage</strong>
+                        <div class="description">Managing authentication tokens in localStorage</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Axios Interceptors</strong>
+                        <div class="description">Automatic token handling in API requests</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Error Handling</strong>
+                        <div class="description">401 responses and authentication failure management</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Natural Language Query System</h2>
+            <ul class="checklist">
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>GPT-4 Integration</strong>
+                        <div class="description">How AI processes natural language queries</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>JPQL Generation</strong>
+                        <div class="description">Converting natural language to database queries</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Special Cases</strong>
+                        <div class="description">Zero absence queries and French character support</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Project Architecture</h2>
+            <ul class="checklist">
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Client-Server Architecture</strong>
+                        <div class="description">Understanding the separation of frontend and backend</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>REST API Design</strong>
+                        <div class="description">API endpoints and communication protocols</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Database Design</strong>
+                        <div class="description">Data models for students, absences, and departments</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Security Considerations</h2>
+            <ul class="checklist">
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>HTTPS Requirements</strong>
+                        <div class="description">Secure communication for Basic Authentication</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>Token Management</strong>
+                        <div class="description">Secure handling of authentication tokens</div>
+                    </div>
+                </li>
+                <li>
+                    <input type="checkbox" class="checkbox">
+                    <div class="item-content">
+                        <strong>XSS Prevention</strong>
+                        <div class="description">Cross-site scripting security practices</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Save checkbox states to localStorage
+        document.querySelectorAll('.checkbox').forEach(checkbox => {
+            const content = checkbox.nextElementSibling.querySelector('strong').textContent;
+            checkbox.checked = localStorage.getItem(content) === 'true';
+            
+            checkbox.addEventListener('change', (e) => {
+                localStorage.setItem(content, e.target.checked);
+                updateProgress();
+            });
+        });
+
+        // Update progress counter
+        function updateProgress() {
+            const total = document.querySelectorAll('.checkbox').length;
+            const checked = document.querySelectorAll('.checkbox:checked').length;
+            const percentage = Math.round((checked / total) * 100);
+            
+            let progress = document.querySelector('.progress');
+            if (!progress) {
+                progress = document.createElement('div');
+                progress.className = 'progress';
+                document.body.appendChild(progress);
+            }
+            
+            progress.innerHTML = `Progress: ${checked}/${total} (${percentage}%)`;
+        }
+
+        // Initial progress update
+        updateProgress();
+    </script>
+</body>
+</html>

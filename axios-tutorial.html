@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios Tutorial - The Complete Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <style>
+        :root {
+            --primary: #4a6cf7;
+            --success: #28a745;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --gray: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7ff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+            background: linear-gradient(135deg, #4a6cf7, #6c5ce7);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            color: var(--primary);
+            margin: 2rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .analogy {
+            background-color: #e9f5ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        pre {
+            background: #2d2d2d;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+        }
+
+        .code-block {
+            position: relative;
+        }
+
+        .code-tabs {
+            display: flex;
+            margin-bottom: -1px;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            background: #e9ecef;
+            border: 1px solid #dee2e6;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .tab.active {
+            background: #2d2d2d;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #3a5bd9;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+        }
+
+        .btn-secondary {
+            background-color: var(--gray);
+        }
+
+        .request-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+
+        .flow-arrow {
+            font-size: 2rem;
+            color: var(--gray);
+        }
+
+        .playground {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .response-area {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            min-height: 100px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background-color: #f8f9fa;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .request-flow {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Axios Tutorial</h1>
+            <p>The Complete Guide to Making HTTP Requests in JavaScript</p>
+        </header>
+
+        <section class="card">
+            <h2>What is Axios?</h2>
+            <p>Axios is a promise-based HTTP client for the browser and Node.js. It provides an easy-to-use API for making asynchronous HTTP requests to REST endpoints and perform CRUD operations.</p>
+            
+            <div class="analogy">
+                <h3>🍽️ Restaurant Analogy</h3>
+                <p>Think of Axios as a waiter in a restaurant:</p>
+                <ul>
+                    <li>You (client) give your order (request) to the waiter</li>
+                    <li>The waiter takes it to the kitchen (server)</li>
+                    <li>The kitchen prepares your food (processes the request)</li>
+                    <li>The waiter brings back your food (response)</li>
+                    <li>If something's wrong with your order, the waiter lets you know (error handling)</li>
+                </ul>
+            </div>
+
+            <h3>Why Axios over Fetch or XMLHttpRequest?</h3>
+            <ul>
+                <li>Automatic JSON data transformation</li>
+                <li>Request and response interception</li>
+                <li>Client-side protection against XSRF</li>
+                <li>Cancel requests</li>
+                <li>Better error handling</li>
+                <li>Wide browser support</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Making Requests</h2>
+            
+            <h3>GET Request</h3>
+            <div class="code-tabs">
+                <div class="tab active" onclick="showTab('get-promise')">Promise</div>
+                <div class="tab" onclick="showTab('get-async')">Async/Await</div>
+            </div>
+            
+            <div class="code-block">
+                <div id="get-promise" class="tab-content active">
+                    <pre><code class="language-javascript">// Simple GET request
+axios.get('https://jsonplaceholder.typicode.com/posts/1')
+  .then(response => {
+    console.log('Response:', response.data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+// GET with query parameters
+axios.get('https://jsonplaceholder.typicode.com/comments', {
+  params: {
+    postId: 1
+  }
+})
+.then(response => {
+  console.log('Comments:', response.data);
+});</code></pre>
+                </div>
+                
+                <div id="get-async" class="tab-content">
+                    <pre><code class="language-javascript">// Using async/await
+try {
+  // Simple GET
+  const response = await axios.get('https://jsonplaceholder.typicode.com/posts/1');
+  console.log('Response:', response.data);
+  
+  // GET with query parameters
+  const comments = await axios.get('https://jsonplaceholder.typicode.com/comments', {
+    params: {
+      postId: 1
+    }
+  });
+  console.log('Comments:', comments.data);
+} catch (error) {
+  console.error('Error:', error);
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>POST Request</h3>
+            <div class="code-tabs">
+                <div class="tab active" onclick="showTab('post-promise')">Promise</div>
+                <div class="tab" onclick="showTab('post-async')">Async/Await</div>
+            </div>
+            
+            <div class="code-block">
+                <div id="post-promise" class="tab-content active">
+                    <pre><code class="language-javascript">// POST request
+axios.post('https://jsonplaceholder.typicode.com/posts', {
+  title: 'foo',
+  body: 'bar',
+  userId: 1
+})
+.then(response => {
+  console.log('Created post:', response.data);
+})
+.catch(error => {
+  console.error('Error:', error);
+});</code></pre>
+                </div>
+                
+                <div id="post-async" class="tab-content">
+                    <pre><code class="language-javascript">// Using async/await
+try {
+  const response = await axios.post('https://jsonplaceholder.typicode.com/posts', {
+    title: 'foo',
+    body: 'bar',
+    userId: 1
+  });
+  console.log('Created post:', response.data);
+} catch (error) {
+  console.error('Error:', error);
+}</code></pre>
+                </div>
+            </div>
+
+            <h3>PUT and DELETE Requests</h3>
+            <pre><code class="language-javascript">// PUT request - Update existing resource
+axios.put('https://jsonplaceholder.typicode.com/posts/1', {
+  id: 1,
+  title: 'updated title',
+  body: 'updated body',
+  userId: 1
+})
+.then(response => {
+  console.log('Updated post:', response.data);
+});
+
+// DELETE request
+axios.delete('https://jsonplaceholder.typicode.com/posts/1')
+  .then(response => {
+    console.log('Post deleted');
+  });</code></pre>
+        </section>
+
+        <section class="card">
+            <h2>Request Flow</h2>
+            <div class="request-flow">
+                <div class="flow-step">
+                    <div class="flow-icon">📱</div>
+                    <h3>Browser</h3>
+                    <p>Initiates request</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">🔌</div>
+                    <h3>Axios</h3>
+                    <p>Processes request</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">🌐</div>
+                    <h3>Server</h3>
+                    <p>Processes request</p>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">
+                    <div class="flow-icon">📥</div>
+                    <h3>Response</h3>
+                    <p>Returns data</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Advanced Features</h2>
+            
+            <h3>Global Configuration</h3>
+            <pre><code class="language-javascript">// Set config defaults when creating the instance
+const api = axios.create({
+  baseURL: 'https://api.example.com',
+  timeout: 1000,
+  headers: {'X-Custom-Header': 'foobar'}
+});
+
+// Alter defaults after instance has been created
+axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;</code></pre>
+
+            <h3>Interceptors</h3>
+            <pre><code class="language-javascript">// Add a request interceptor
+axios.interceptors.request.use(
+  config => {
+    // Do something before request is sent
+    console.log('Request sent:', config);
+    return config;
+  },
+  error => {
+    // Do something with request error
+    return Promise.reject(error);
+  }
+);
+
+// Add a response interceptor
+axios.interceptors.response.use(
+  response => {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    return response;
+  },
+  error => {
+    // Any status codes that falls outside the range of 2xx cause this function to trigger
+    if (error.response.status === 401) {
+      // Handle unauthorized errors
+      console.log('Unauthorized, logging out...');
+    }
+    return Promise.reject(error);
+  }
+);</code></pre>
+
+            <h3>Multiple Concurrent Requests</h3>
+            <pre><code class="language-javascript">function getUserAccount() {
+  return axios.get('/user/12345');
+}
+
+function getUserPermissions() {
+  return axios.get('/user/12345/permissions');
+}
+
+// Execute both requests in parallel
+Promise.all([getUserAccount(), getUserPermissions()])
+  .then(([user, permissions]) => {
+    console.log('User:', user.data);
+    console.log('Permissions:', permissions.data);
+  });</code></pre>
+        </section>
+
+
+        <section class="card">
+            <h2>Axios vs Fetch</h2>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Axios</th>
+                        <th>Fetch</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Browser Support</td>
+                        <td>Works in all modern browsers and Node.js</td>
+                        <td>Modern browsers only, needs polyfill for older browsers</td>
+                    </tr>
+                    <tr>
+                        <td>Response Timeout</td>
+                        <td>Built-in timeout support</td>
+                        <td>No built-in timeout, requires AbortController</td>
+                    </tr>
+                    <tr>
+                        <td>Automatic JSON</td>
+                        <td>Yes, automatic transformation</td>
+                        <td>Requires response.json()</td>
+                    </tr>
+                    <tr>
+                        <td>Request Cancellation</td>
+                        <td>Built-in support</td>
+                        <td>Requires AbortController</td>
+                    </tr>
+                    <tr>
+                        <td>HTTP Interceptors</td>
+                        <td>Yes</td>
+                        <td>No, requires custom implementation</td>
+                    </tr>
+                    <tr>
+                        <td>Progress Tracking</td>
+                        <td>Yes, with onUploadProgress/onDownloadProgress</td>
+                        <td>Yes, using response.body</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="card">
+            <h2>Best Practices</h2>
+            <ul>
+                <li>✅ <strong>Use async/await</strong> for better readability of asynchronous code</li>
+                <li>✅ <strong>Create an instance</strong> with base URL and default headers</li>
+                <li>✅ <strong>Use interceptors</strong> for request/response transformation and error handling</li>
+                <li>✅ <strong>Handle errors properly</strong> with try/catch or .catch()</li>
+                <li>✅ <strong>Cancel requests</strong> when components unmount to prevent memory leaks</li>
+                <li>✅ <strong>Set timeouts</strong> to prevent hanging requests</li>
+                <li>✅ <strong>Use environment variables</strong> for API URLs and sensitive data</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Common Pitfalls</h2>
+            <div class="analogy">
+                <h3>⚠️ Don't forget to handle errors</h3>
+                <p>Always include error handling for your API calls to prevent uncaught promise rejections.</p>
+            </div>
+            
+            <div class="analogy" style="background-color: #fff3f3; border-left-color: #dc3545;">
+                <h3>⚠️ CORS Issues</h3>
+                <p>When making cross-origin requests, ensure the server is configured to accept requests from your domain.</p>
+            </div>
+            
+            <div class="analogy" style="background-color: #fff8e6; border-left-color: #ffc107;">
+                <h3>⚠️ Async/Await Gotchas</h3>
+                <p>Remember to use <code>await</code> when making API calls in async functions, otherwise you'll get a Promise instead of the response.</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js"></script>
+    
+    <script>
+        // Tab functionality
+        function showTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Example of making a real API call
+        async function makeRequest(method, url, data = null) {
+            const responseElement = document.getElementById('response');
+            responseElement.innerHTML = 'Loading...';
+            responseElement.style.color = 'black';
+            
+            try {
+                let response;
+                switch(method.toLowerCase()) {
+                    case 'get':
+                        response = await axios.get(url);
+                        break;
+                    case 'post':
+                        response = await axios.post(url, data);
+                        break;
+                    case 'put':
+                        response = await axios.put(url, data);
+                        break;
+                    case 'delete':
+                        response = await axios.delete(url);
+                        break;
+                    default:
+                        throw new Error('Unsupported HTTP method');
+                }
+                
+                responseElement.innerHTML = JSON.stringify(response.data, null, 2);
+                responseElement.style.color = 'green';
+            } catch (error) {
+                let errorMessage = 'Error: ';
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    errorMessage += `${error.response.status} - ${error.response.statusText}\n\n`;
+                    errorMessage += JSON.stringify(error.response.data, null, 2);
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    errorMessage += 'No response received from server';
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    errorMessage += error.message;
+                }
+                
+                responseElement.innerHTML = errorMessage;
+                responseElement.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>

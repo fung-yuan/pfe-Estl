@@ -1,0 +1,88 @@
+/* Base theme for the Student Management System presentation */
+
+:root {
+  --primary-color: #1a5fb4;
+  --secondary-color: #3584e4;
+  --accent-color: #26a269;
+  --text-color: #333333;
+  --background-color: #f6f8fa;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --slide-width: 100%;
+  --slide-height: 100%;
+  
+  /* Enhanced colors for visual appeal */
+  --gradient-blue-start: #1a5fb4;
+  --gradient-blue-end: #3584e4;
+  --gradient-green-start: #26a269;
+  --gradient-green-end: #33d17a;
+  --highlight-color: #ffbe6f;
+  --card-bg-color: #ffffff;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #000;
+  font-size: 16px;
+}
+
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reveal {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+/* Make images high quality */
+img {
+  image-rendering: auto;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+}
+
+/* Better fullscreen mode */
+.reveal.has-vertical-slides .slides > section > section {
+  padding: 0;
+}
+
+/* Improved slide transitions */
+.reveal .slides > section,
+.reveal .slides > section > section {
+  transition: transform 0.8s cubic-bezier(0.26, 0.86, 0.44, 0.985), opacity 0.8s cubic-bezier(0.26, 0.86, 0.44, 0.985);
+}
+
+/* Better navigation controls */
+.reveal .controls {
+  bottom: 16px;
+  right: 16px;
+}
+
+.reveal .controls button {
+  color: var(--primary-color);
+  opacity: 0.7;
+}
+
+.reveal .controls button:hover {
+  opacity: 1;
+}
+
+/* Progress bar styling */
+.reveal .progress {
+  height: 5px;
+  color: var(--primary-color);
+}

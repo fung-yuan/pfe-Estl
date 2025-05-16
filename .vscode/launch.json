@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-EstlApplication<estl>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.pfe.estl.EstlApplication",
+            "projectName": "estl",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
